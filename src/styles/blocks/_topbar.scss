@@ -1,0 +1,32 @@
+@use '../color' as *;
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  width: 100%;
+  height: 2.5rem;
+  padding: 0 2rem;
+
+  &__section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1 0 0;
+
+    &:first-child {
+      justify-content: flex-start;
+    }
+
+    &:last-child {
+      justify-content: flex-end;
+    }
+  }
+
+  &__button {
+    margin-left: 1rem;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid hex(grey, lighter);
+  }
+}

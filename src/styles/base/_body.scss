@@ -10,3 +10,7 @@ body {
   color: color.hex(grey, lightest);
   background-color: color.hex(grey, darkest);
 }
+
+[id='app'] {
+  height: 100%;
+}

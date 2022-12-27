@@ -1,4 +1,4 @@
-*.cjs
+**/*.vue
 dist/**
 **/vendors/**
 LICENSE

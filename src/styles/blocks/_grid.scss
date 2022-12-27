@@ -1,0 +1,35 @@
+@use '../color' as *;
+
+.grid {
+  display: flex;
+  flex-grow: 1;
+  min-width: 100%;
+
+  &.-paused {
+    border-right: 1px solid hex(grey, dark);
+    border-bottom: 1px solid hex(grey, dark);
+  }
+
+  &__column {
+    flex-shrink: 0;
+    width: var(--cell-size);
+
+    .grid.-paused & {
+      border-left: 1px solid hex(grey, dark);
+    }
+  }
+
+  &__cell {
+    display: block;
+    flex-shrink: 0;
+    height: var(--cell-size);
+
+    &.-alive {
+      background-color: hex(grey, light);
+    }
+
+    .grid.-paused & {
+      border-top: 1px solid hex(grey, dark);
+    }
+  }
+}
