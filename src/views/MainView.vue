@@ -10,9 +10,16 @@
       </div>
 
       <div class="topbar__section">
-        <button v-if="!isRunning && generation > 0" class="topbar__button" @click="resetGridState">Reset</button>
-        <button v-if="!isRunning && !generation" class="topbar__button" @click="logState">Log</button>
-        <button class="topbar__button" @click="togglePlay">{{ mainActionButtonLabel }}</button>
+        <template v-if="!isRunning">
+          <template v-if="isEditing">
+            <button class="topbar__button" @click="toggleEditor">Cancel</button>
+            <button class="topbar__button" @click="onSave">Save</button>
+          </template>
+          <button v-else class="topbar__button" @click="toggleEditor">Edit</button>
+          <button v-if="generation > 0" class="topbar__button" @click="resetGridState">Reset</button>
+        </template>
+
+        <button v-if="!isEditing" class="topbar__button" @click="togglePlay">{{ mainActionButtonLabel }}</button>
       </div>
     </menu>
 
@@ -22,14 +29,22 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useGameGrid } from '@/comps';
+import { useGrid, useGridEditor } from '@/comps';
 import GameGrid from '@/components/GameGrid.vue';
 
 const title = 'Game of Life';
-const { generation, isRunning, logState, resetGridState, togglePlay } = useGameGrid();
+const { grid, generation, isRunning, isEditing, resetGridState, togglePlay, toggleEditor } = useGrid();
 
 const mainActionButtonLabel = computed(() => {
   if (isRunning.value) return 'Pause';
   return !generation.value ? 'Start' : 'Resume';
 });
+
+let gridEditor: ReturnType<typeof useGridEditor> | undefined;
+
+async function onSave() {
+  if (!gridEditor) gridEditor = useGridEditor(grid);
+  await gridEditor.commitToGrid();
+  toggleEditor();
+}
 </script>

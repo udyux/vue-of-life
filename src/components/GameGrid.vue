@@ -1,7 +1,7 @@
 <template>
-  <section ref="gameNode" class="grid" :class="{ '-paused': !isRunning }">
-    <article v-for="(column, x) in grid" :key="x" class="grid__column" :style="{ '--cell-size': `${cellSize}px` }">
-      <output
+  <section ref="gameNode" class="grid">
+    <ul v-for="(column, x) in grid" :key="x" class="grid__column" :style="{ '--cell-size': `${cellSize}px` }">
+      <li
         v-for="(isAlive, y) in column"
         :key="y"
         class="grid__cell"
@@ -9,20 +9,24 @@
         :style="{ '--cell-size': `${cellSize}px` }"
         @click="onClickCell(x, y, isAlive)"
       />
-    </article>
+    </ul>
+
+    <EditorGrid v-if="isEditing" v-bind="editorProps" />
   </section>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { useGameGrid } from '@/comps';
+import { useGrid } from '@/comps';
 import { initialStates } from '@/models';
+import EditorGrid from './EditorGrid.vue';
 
-const cellSize = 10;
+const { grid, isRunning, isEditing, setGridState, setCellValue } = useGrid();
 
 const gameNode = ref<HTMLElement | null>(null);
 
-const { grid, isRunning, setGridState, setCellValue } = useGameGrid();
+const cellSize = 10;
+const editorProps = { grid, cellSize };
 
 onMounted(() => {
   if (!gameNode.value) return;
@@ -33,6 +37,6 @@ onMounted(() => {
 });
 
 function onClickCell(x: number, y: number, isAlive: boolean) {
-  if (!isRunning.value) setCellValue([x, y], !isAlive);
+  if (!isRunning.value && isRunning.value) setCellValue([x, y], !isAlive);
 }
 </script>

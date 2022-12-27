@@ -1,15 +1,14 @@
-import { watch } from 'vue';
 import type { Ref } from 'vue';
 import type { Grid, Coordinates } from '@/types/grid';
+import { watch } from 'vue';
+import useGridState from './useGridState';
 
 export default (grid: Ref<Grid>, generation: Ref<number>, isRunning: Ref<boolean>) => {
+  const { getCellValue } = useGridState(grid, generation);
+
   watch(() => generation.value, generationTick);
 
-  function getCellValue([x, y]: Coordinates) {
-    return grid.value[x][y];
-  }
-
-  function getNeighbors([x, y]: Coordinates): Coordinates[] {
+  function getCellNeighbors([x, y]: Coordinates): Coordinates[] {
     const xLeft = !x ? grid.value.length - 1 : x - 1;
     const xRight = (x + 1) % grid.value.length;
     const yUp = !y ? grid.value[0].length - 1 : y - 1;
@@ -28,16 +27,12 @@ export default (grid: Ref<Grid>, generation: Ref<number>, isRunning: Ref<boolean
   }
 
   function shouldCellLive([x, y]: Coordinates, isAlive: boolean) {
-    const livingNeighbors = getNeighbors([x, y]).reduce<boolean[]>(
-      (living, coords) => (getCellValue(coords) ? [...living, true] : living),
-      []
-    ).length;
-
+    const livingNeighbors = getCellNeighbors([x, y]).filter(getCellValue).length;
     return livingNeighbors === 3 || (isAlive && livingNeighbors === 2);
   }
 
   function nextGeneration() {
-    generation.value += 1;
+    if (isRunning.value) generation.value += 1;
   }
 
   function generationTick() {

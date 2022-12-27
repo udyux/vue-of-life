@@ -5,7 +5,7 @@ const svgStore = require('svgstore');
 const { optimize, loadConfig } = require('svgo');
 
 const src = resolve(__dirname, 'src/assets/icons');
-const dest = resolve(__dirname, 'public/icons.svg');
+const dest = resolve(__dirname, 'src/assets/icons/sprite/sprite.svg');
 
 const addIcons = (files, sprite) => {
   files.forEach(({ id, path }) => sprite.add(id, fs.readFileSync(path, 'utf8')));

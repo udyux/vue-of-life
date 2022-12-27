@@ -1,9 +1,9 @@
+import type { Coordinates } from '@/types/grid';
 import anchorSymmetry from '@/assets/data/Anchor-Symmetry.json';
 import cmcFloat from '@/assets/data/CMC-Float.json';
 import oPositive from '@/assets/data/O-Positive.json';
 import rPentomino from '@/assets/data/R-Pentomino.json';
 import twinLauncher from '@/assets/data/Twin-Launcher.json';
-import type { Coordinates } from '@/types/grid';
 
 export const initialStates = {
   rPentomino: {
