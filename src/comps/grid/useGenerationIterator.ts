@@ -4,26 +4,41 @@ import { watch } from 'vue';
 import useGridState from './useGridState';
 
 export default (grid: Ref<Grid>, generation: Ref<number>, isRunning: Ref<boolean>) => {
-  const { getCellValue } = useGridState(grid, generation);
+  const { getCellValue, wrapCoordinates } = useGridState(grid, generation);
 
   watch(() => generation.value, generationTick);
 
-  function getCellNeighbors([x, y]: Coordinates): Coordinates[] {
-    const xLeft = !x ? grid.value.length - 1 : x - 1;
-    const xRight = (x + 1) % grid.value.length;
-    const yUp = !y ? grid.value[0].length - 1 : y - 1;
-    const yDown = (y + 1) % grid.value[0].length;
+  // function getCellNeighbors([x, y]: Coordinates): Coordinates[] {
+  //   const wrap = wrapCoordinates.value;
+  //   const xLeft = !x ? grid.value.length - 1 : x - 1;
+  //   const xRight = (x + 1) % grid.value.length;
+  //   const yUp = !y ? grid.value[0].length - 1 : y - 1;
+  //   const yDown = (y + 1) % grid.value[0].length;
 
-    return [
-      [xLeft, yUp],
-      [xLeft, y],
-      [xLeft, yDown],
-      [x, yUp],
-      [x, yDown],
-      [xRight, yUp],
-      [xRight, y],
-      [xRight, yDown],
+  //   return [
+  //     [xLeft, yUp],
+  //     [xLeft, y],
+  //     [xLeft, yDown],
+  //     [x, yUp],
+  //     [x, yDown],
+  //     [xRight, yUp],
+  //     [xRight, y],
+  //     [xRight, yDown],
+  //   ];
+  // }
+  function getCellNeighbors([x, y]: Coordinates): Coordinates[] {
+    const neighbors: Coordinates[] = [
+      [x - 1, y - 1],
+      [x - 1, y],
+      [x - 1, y + 1],
+      [x, y - 1],
+      [x, y + 1],
+      [x + 1, y - 1],
+      [x + 1, y],
+      [x + 1, y + 1],
     ];
+
+    return neighbors.map(wrapCoordinates);
   }
 
   function shouldCellLive([x, y]: Coordinates, isAlive: boolean) {

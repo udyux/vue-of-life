@@ -1,6 +1,12 @@
 <template>
-  <section class="grid -editor" @mouseleave="onMouseLeave">
-    <ul v-for="(column, x) in editorGrid" :key="x" class="grid__column" :style="{ '--cell-size': `${cellSize}px` }">
+  <section class="grid -editor" @keyup="onKeyup" @mouseleave="onMouseLeave">
+    <ul
+      v-for="(column, x) in editorGrid"
+      :key="x"
+      class="grid__column"
+      :class="{ '-center': x === centerColumn }"
+      :style="{ '--cell-size': `${cellSize}px` }"
+    >
       <li
         v-for="(isAlive, y) in column"
         :key="y"
@@ -17,17 +23,46 @@
 <script setup lang="ts">
 import type { Ref } from 'vue';
 import type { Grid } from '@/types/grid';
-import { onMounted } from 'vue';
+import { KeyCode } from '@/types/keyboard-events';
+import { computed, onMounted, onBeforeUnmount } from 'vue';
 import { useGridEditor } from '@/comps';
-import { initialStates } from '@/models';
+import { shapes } from '@/models';
 
 const props = defineProps<{ grid: Ref<Grid>; cellSize: number }>();
 
-const { editorGrid, activeCell, activeShape, createEditorGrid, commitToEditor } = useGridEditor(props.grid);
+const {
+  editorGrid,
+  activeCell,
+  activeShape,
+  createEditorGrid,
+  commitToEditor,
+  mirrorShapeX,
+  mirrorShapeY,
+  rotateShape,
+} = useGridEditor(props.grid);
 
-activeShape.value = initialStates.rPentomino.state;
+activeShape.value = shapes.twinLauncher.state;
 
-onMounted(createEditorGrid);
+const keyboardHandlers = {
+  [KeyCode.X]: mirrorShapeX,
+  [KeyCode.Y]: mirrorShapeY,
+  [KeyCode.R]: rotateShape,
+};
+
+const centerColumn = computed(() => Math.floor(editorGrid.value.length * 0.5));
+
+onMounted(() => {
+  createEditorGrid();
+  document.addEventListener('keyup', onKeyup);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener('keyup', onKeyup);
+});
+
+function onKeyup({ code }: KeyboardEvent) {
+  if (keyboardHandlers[code as KeyCode]) keyboardHandlers[code as KeyCode]();
+}
 
 function onMouseLeave() {
   activeCell.value = null;

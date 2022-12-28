@@ -7,24 +7,18 @@ const editorGrid = ref<Grid>([]);
 const activeCell = ref<Coordinates | null>(null);
 const activeShape = ref<Coordinates[] | null>(null);
 
+const editorState = useGridState(editorGrid);
+const { wrapCoordinates } = editorState;
+
 const computedEditorGrid = computed<Grid>(() => {
   if (!editorGrid.value.length) return editorGrid.value;
   const currentEditorGrid = Array.from(editorGrid.value, column => Array.from(column));
-  const columnCount = currentEditorGrid.length;
-  const rowCount = currentEditorGrid[0].length;
 
   if (activeCell.value && activeShape.value) {
     const [cx, cy] = activeCell.value;
 
     activeShape.value
-      .map<Coordinates>(([rx, ry]) => {
-        const xRaw = cx + rx;
-        const yRaw = cy + ry;
-        const x = xRaw < 0 ? columnCount + xRaw : xRaw % columnCount;
-        const y = yRaw < 0 ? rowCount + yRaw : yRaw % rowCount;
-        if (xRaw < 0) console.log({ xRaw, x, columnCount });
-        return [x, y];
-      })
+      .map(([rx, ry]) => wrapCoordinates([cx + rx, cy + ry]))
       .forEach(([x, y]) => {
         currentEditorGrid[x][y] = true;
       });
@@ -40,7 +34,6 @@ export default (grid: Ref<Grid>) => {
   const columnCount = grid.value.length;
   const rowCount = grid.value[0].length;
   const gameState = useGridState(grid);
-  const editorState = useGridState(editorGrid);
 
   function mirrorShapeX() {
     if (!activeShape.value) return;
@@ -52,20 +45,25 @@ export default (grid: Ref<Grid>) => {
     activeShape.value = activeShape.value.map(([x, y]) => [x, y * -1]);
   }
 
+  function rotateShape() {
+    if (!activeShape.value) return;
+    activeShape.value = activeShape.value.map(([x, y]) => [y * -1, x]);
+  }
+
   function createEditorGrid() {
-    editorState.setGridState(columnCount, rowCount, [], true);
+    editorState.createGrid(columnCount, rowCount, [], true);
   }
 
   function commitToEditor() {
-    editorState.setGridState(columnCount, rowCount, editorState.getGridState(computedEditorGrid), true);
+    editorState.setGridState(editorState.getGridState(computedEditorGrid));
   }
 
   async function commitToGrid() {
     return await new Promise<void>(resolve => {
-      gameState.setGridState(columnCount, rowCount, [...gameState.getGridState(), ...editorState.getGridState()]);
+      gameState.setGridState([...gameState.getGridState(), ...editorState.getGridState()], true);
       activeCell.value = null;
       activeShape.value = null;
-      createEditorGrid();
+      editorState.clearGrid();
       resolve();
     });
   }
@@ -76,6 +74,7 @@ export default (grid: Ref<Grid>) => {
     activeShape,
     mirrorShapeX,
     mirrorShapeY,
+    rotateShape,
     createEditorGrid,
     commitToEditor,
     commitToGrid,

@@ -22,6 +22,10 @@
 
     .grid.-editor & {
       border-left: 1px solid hex(grey, dark);
+
+      &.-center:hover {
+        background-color: alpha(status, error, 0.4);
+      }
     }
   }
 
@@ -31,7 +35,7 @@
 
     &.-alive {
       background-color: hex(grey, light);
-      box-shadow: rem(3) rem(3) rem(8) rgba(black, 0.6);
+      box-shadow: rem(3) rem(3) rem(8) rgba(black, 0.8);
     }
 
     .grid.-editor & {
