@@ -10,7 +10,10 @@ const isEditing = ref(false);
 
 export default () => {
   const { startIterations } = useGenerationIterator(grid, generation, isRunning);
-  const { createGrid, setGridState, resetGridState, getGridState, setCellValue } = useGridState(grid, generation);
+  const { createGrid, clearGrid, setGridState, resetGridState, getGridState, setCellValue } = useGridState(
+    grid,
+    generation
+  );
 
   function togglePlay() {
     isRunning.value = !isRunning.value;
@@ -33,6 +36,8 @@ export default () => {
     togglePlay,
     toggleEditor,
     createGrid,
+    clearGrid,
+    getGridState,
     setGridState,
     resetGridState,
     setCellValue,

@@ -23,6 +23,7 @@ export default (grid: Ref<Grid>, generation?: Ref<number>) => {
 
   function clearGrid() {
     grid.value = grid.value.map(columns => columns.map(() => false));
+    previousInitialGridState = [];
   }
 
   function getGridState(gridState: Ref<Grid> | ComputedRef<Grid> = grid) {

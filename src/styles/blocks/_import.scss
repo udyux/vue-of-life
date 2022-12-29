@@ -1,0 +1,15 @@
+@use '../utils' as *;
+@use '../color' as *;
+
+.import {
+  display: block;
+  overflow-y: auto;
+  width: 100%;
+  height: 20rem;
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border: 1px solid hex(grey, lightest);
+  border-radius: rem(4);
+  font-family: monospace;
+  line-height: 1.6;
+}

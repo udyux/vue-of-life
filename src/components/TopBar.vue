@@ -16,7 +16,10 @@
         </template>
 
         <template v-else>
+          <button class="topbar__button" @click="modals.import = true">Import</button>
+          <button class="topbar__button" @click="modals.export = true">Export</button>
           <button class="topbar__button" @click="toggleEditor">Edit</button>
+          <button class="topbar__button" @click="clearGrid">Clear</button>
           <button v-if="generation > 0" class="topbar__button" @click="resetGridState">Reset</button>
         </template>
       </template>
@@ -24,13 +27,22 @@
       <button v-if="!isEditing" class="topbar__button" @click="togglePlay">{{ mainActionButtonLabel }}</button>
     </div>
   </menu>
+
+  <ModalExport v-if="modals.export" @close="modals.export = false" />
+  <ModalImport v-if="modals.import" @close="modals.import = false" />
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { reactive, computed } from 'vue';
 import { useGrid, useGridEditor } from '@/comps';
+import { ModalExport, ModalImport } from './modals';
 
-const { grid, generation, isRunning, isEditing, resetGridState, togglePlay, toggleEditor } = useGrid();
+const { grid, generation, isRunning, isEditing, resetGridState, clearGrid, togglePlay, toggleEditor } = useGrid();
+
+const modals = reactive({
+  export: false,
+  import: false,
+});
 
 const mainActionButtonLabel = computed(() => {
   if (isRunning.value) return 'Pause';
