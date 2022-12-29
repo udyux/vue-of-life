@@ -6,8 +6,8 @@
         <code class="export">{{ jsonState }}</code>
 
         <div class="modal__footer">
-          <button class="modal__button" @click="copyToClipboard">Copy</button>
-          <button class="modal__button" @click="emit('close')">Done</button>
+          <button class="modal__button button" @click="copyToClipboard">Copy</button>
+          <button class="modal__button button" @click="emit('close')">Done</button>
         </div>
       </div>
     </div>

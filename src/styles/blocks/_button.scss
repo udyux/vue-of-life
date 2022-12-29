@@ -1,0 +1,20 @@
+@use '../utils' as *;
+@use '../color' as *;
+
+.button {
+  padding: 0.25rem 0.5rem;
+  background-color: transparent;
+  border: 1px solid hex(grey, lighter);
+  border-radius: rem(4);
+  transition: background-color 80ms linear, transform 50ms cb();
+
+  &:hover {
+    background-color: alpha(grey, lighter, 0.15);
+  }
+
+  &:active {
+    background-color: transparent;
+    transform: scale(0.9);
+    transition: none;
+  }
+}

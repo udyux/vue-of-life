@@ -11,20 +11,20 @@
     <div class="topbar__section">
       <template v-if="!isRunning">
         <template v-if="isEditing">
-          <button class="topbar__button" @click="toggleEditor">Cancel</button>
-          <button class="topbar__button" @click="onSave">Save</button>
+          <button class="topbar__button button" @click="toggleEditor">Cancel</button>
+          <button class="topbar__button button" @click="onSave">Save</button>
         </template>
 
         <template v-else>
-          <button class="topbar__button" @click="modals.import = true">Import</button>
-          <button class="topbar__button" @click="modals.export = true">Export</button>
-          <button class="topbar__button" @click="toggleEditor">Edit</button>
-          <button class="topbar__button" @click="clearGrid">Clear</button>
-          <button v-if="generation > 0" class="topbar__button" @click="resetGridState">Reset</button>
+          <button class="topbar__button button" @click="modals.import = true">Import</button>
+          <button class="topbar__button button" @click="modals.export = true">Export</button>
+          <button class="topbar__button button" @click="toggleEditor">Edit</button>
+          <button class="topbar__button button" @click="clearGrid">Clear</button>
+          <button v-if="generation > 0" class="topbar__button button" @click="resetGridState">Reset</button>
         </template>
       </template>
 
-      <button v-if="!isEditing" class="topbar__button" @click="togglePlay">{{ mainActionButtonLabel }}</button>
+      <button v-if="!isEditing" class="topbar__button button" @click="togglePlay">{{ mainActionButtonLabel }}</button>
     </div>
   </menu>
 

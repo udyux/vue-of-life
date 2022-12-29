@@ -1,8 +1,8 @@
 import type { Ref, ComputedRef } from 'vue';
 import type { Grid, Coordinates } from '@/types/grid';
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 
-let previousInitialGridState: Coordinates[] = [];
+const initialGridState = ref<Coordinates[]>([]);
 
 const createCoordinateWrapper =
   (columnCount: number, rowCount: number) =>
@@ -16,14 +16,13 @@ export default (grid: Ref<Grid>, generation?: Ref<number>) => {
       : createCoordinateWrapper(grid.value.length, grid.value[0].length)
   );
 
-  function createGrid(columnCount: number, rowCount: number, state: Coordinates[] = [], isEditor?: boolean) {
+  function createGrid(columnCount: number, rowCount: number, state: Coordinates[] = []) {
     grid.value = Array.from(Array(columnCount), () => Array.from(Array(rowCount), () => false));
-    setGridState(state, !isEditor);
+    setGridState(state);
   }
 
   function clearGrid() {
     grid.value = grid.value.map(columns => columns.map(() => false));
-    previousInitialGridState = [];
   }
 
   function getGridState(gridState: Ref<Grid> | ComputedRef<Grid> = grid) {
@@ -39,16 +38,15 @@ export default (grid: Ref<Grid>, generation?: Ref<number>) => {
     }, []);
   }
 
-  function setGridState(state: Coordinates[] = [], saveAsInitialState?: boolean) {
+  function setGridState(state: Coordinates[] = []) {
     const [cx, cy] = [Math.floor(grid.value.length * 0.5), Math.floor(grid.value[0].length * 0.5)];
     clearGrid();
     state.forEach(([rx, ry]) => setCellValue(wrapCoordinates([cx + rx, cy + ry]), true));
-    if (saveAsInitialState) previousInitialGridState = state;
   }
 
   function resetGridState() {
     if (generation) generation.value = 0;
-    setGridState(previousInitialGridState);
+    setGridState(initialGridState.value);
   }
 
   function getCellValue([x, y]: Coordinates) {
@@ -63,7 +61,12 @@ export default (grid: Ref<Grid>, generation?: Ref<number>) => {
     return coordinateWrapper.value(coords);
   }
 
+  function saveInitialState() {
+    initialGridState.value = getGridState();
+  }
+
   return {
+    saveInitialState,
     createGrid,
     clearGrid,
     setGridState,

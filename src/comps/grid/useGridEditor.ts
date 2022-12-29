@@ -51,7 +51,7 @@ export default (grid: Ref<Grid>) => {
   }
 
   function createEditorGrid() {
-    editorState.createGrid(columnCount, rowCount, [], true);
+    editorState.createGrid(columnCount, rowCount, []);
   }
 
   function commitToEditor() {
@@ -60,7 +60,7 @@ export default (grid: Ref<Grid>) => {
 
   async function commitToGrid() {
     return await new Promise<void>(resolve => {
-      gameState.setGridState([...gameState.getGridState(), ...editorState.getGridState()], true);
+      gameState.setGridState([...gameState.getGridState(), ...editorState.getGridState()]);
       activeCell.value = null;
       activeShape.value = null;
       editorState.clearGrid();

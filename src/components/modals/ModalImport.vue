@@ -6,8 +6,8 @@
         <textarea v-model="jsonState" class="import"></textarea>
 
         <div class="modal__footer">
-          <button class="modal__button" @click="emit('close')">Cancel</button>
-          <button class="modal__button" @click="onImport">Import</button>
+          <button class="modal__button button" @click="emit('close')">Cancel</button>
+          <button class="modal__button button" @click="onImport">Import</button>
         </div>
       </div>
     </div>
@@ -29,7 +29,7 @@ const error = ref<unknown | null>(null);
 
 function onImport() {
   try {
-    setGridState(JSON.parse(jsonState.value), true);
+    setGridState(JSON.parse(jsonState.value));
     emit('close');
   } catch (e) {
     error.value = e;
