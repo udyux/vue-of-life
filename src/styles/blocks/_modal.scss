@@ -21,10 +21,18 @@
     box-shadow: 0 rem(3) rem(6) rgba(black, 0.1);
   }
 
+  &__header {
+    display: flex;
+  }
+
   &__footer {
     display: flex;
     justify-content: flex-end;
     margin-top: 2rem;
+  }
+
+  &__input {
+    margin-left: 1rem;
   }
 
   &__button {

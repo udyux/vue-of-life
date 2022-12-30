@@ -31,14 +31,11 @@
 </template>
 
 <script setup lang="ts">
+import { GlobalSelectEvents } from '@/types/global-events';
 import { computed, watch, ref, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import SimpleBar from 'simplebar';
 import { Collapsible } from '../layout';
 import { eventBus } from '@/utils';
-
-enum SelectEvents {
-  Open = 'select:open',
-}
 
 type Props = {
   modelValue: string | number | null;
@@ -69,10 +66,10 @@ watch(isOpen, (newValue: boolean, oldValue: boolean) => {
 
   if (newValue) {
     document.body.addEventListener('click', closeMenu);
-    eventBus.on(SelectEvents.Open, closeMenu);
+    eventBus.on(GlobalSelectEvents.Close, closeMenu);
   } else {
     document.body.removeEventListener('click', closeMenu);
-    eventBus.off(SelectEvents.Open, closeMenu);
+    eventBus.off(GlobalSelectEvents.Close, closeMenu);
   }
 });
 
@@ -83,7 +80,7 @@ onMounted(async () => {
 
 onBeforeUnmount(() => {
   document.body.removeEventListener('click', closeMenu);
-  eventBus.off(SelectEvents.Open, closeMenu);
+  eventBus.off(GlobalSelectEvents.Close, closeMenu);
 });
 
 function setSelection(value: string | number | null) {
@@ -96,8 +93,9 @@ function isOptionSelected(value: string | number) {
 }
 
 function onClickLabel() {
+  if (isOpen.value) emit('update:modelValue', null);
   isOpen.value = !isOpen.value;
-  eventBus.emit(SelectEvents.Open);
+  eventBus.emit(GlobalSelectEvents.Close);
 }
 
 function closeMenu() {

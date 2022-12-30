@@ -14,18 +14,13 @@
   },
   "dependencies": {
     "css-reset-udyux": "^1.0.5",
-    "lodash.debounce": "^4.0.8",
-    "lodash.omit": "^4.5.0",
     "simplebar": "^5.3.9",
     "tiny-emitter": "^2.1.0",
-    "vue": "^3.2.45",
-    "vue-router": "^4.1.6"
+    "vue": "^3.2.45"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",
     "@types/fs-extra": "^9.0.13",
-    "@types/lodash.debounce": "^4.0.7",
-    "@types/lodash.omit": "^4.5.7",
     "@types/node": "^18.11.12",
     "@typescript-eslint/eslint-plugin": "^5.47.0",
     "@typescript-eslint/parser": "^5.47.0",

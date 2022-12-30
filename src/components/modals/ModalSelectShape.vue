@@ -22,10 +22,10 @@
           </li>
         </ul>
 
-        <div class="modal__footer">
+        <footer class="modal__footer">
           <button class="modal__button button" @click="emit('close')">Cancel</button>
           <button class="modal__button button" @click="onSave">Select</button>
-        </div>
+        </footer>
       </div>
     </div>
   </Teleport>

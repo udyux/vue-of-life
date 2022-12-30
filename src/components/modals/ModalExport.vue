@@ -5,10 +5,10 @@
         <p>Copy and save this JSON code to import later.</p>
         <code class="export">{{ jsonState }}</code>
 
-        <div class="modal__footer">
+        <footer class="modal__footer">
           <button class="modal__button button" @click="copyToClipboard">Copy</button>
           <button class="modal__button button" @click="emit('close')">Done</button>
-        </div>
+        </footer>
       </div>
     </div>
   </Teleport>
