@@ -5,7 +5,8 @@
     </div>
 
     <div class="topbar__section">
-      <output>Generation: {{ generation }}</output>
+      <button v-if="isEditing" class="button" @click="modals.shape = true">Select shape</button>
+      <output v-else>Generation: {{ generation }}</output>
     </div>
 
     <div class="topbar__section">
@@ -30,18 +31,20 @@
 
   <ModalExport v-if="modals.export" @close="modals.export = false" />
   <ModalImport v-if="modals.import" @close="modals.import = false" />
+  <ModalSelectShape v-if="modals.shape" @close="modals.shape = false" />
 </template>
 
 <script setup lang="ts">
 import { reactive, computed } from 'vue';
 import { useGrid, useGridEditor } from '@/comps';
-import { ModalExport, ModalImport } from './modals';
+import { ModalExport, ModalImport, ModalSelectShape } from '../modals';
 
 const { grid, generation, isRunning, isEditing, resetGridState, clearGrid, togglePlay, toggleEditor } = useGrid();
 
 const modals = reactive({
   export: false,
   import: false,
+  shape: false,
 });
 
 const mainActionButtonLabel = computed(() => {

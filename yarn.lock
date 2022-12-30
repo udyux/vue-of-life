@@ -3277,10 +3277,10 @@ stylelint-config-standard@^20.0.0:
   dependencies:
     stylelint-config-recommended "^3.0.0"
 
-stylelint-config-udyux@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/stylelint-config-udyux/-/stylelint-config-udyux-4.4.0.tgz#8ab5802e616f6e0510a3e753a54d3bfc4bbafc15"
-  integrity sha512-8GNPPl0dHHo8NJQX0rhISbYm9kCEmapft9DVI2u1Eov9pTJy709MZ5MjrLseno+LNPhGLvRICFze6M9As3cZbg==
+stylelint-config-udyux@^4.5.1:
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/stylelint-config-udyux/-/stylelint-config-udyux-4.5.1.tgz#e4812c91fd1fba05a993d8edb950ddcdba1c7bab"
+  integrity sha512-Mr00q/bnxqRfugdVeUJs0dIB8EZU6oISEX/7HmZOP0vkRFc6OydDV1qYCuOAZj4YEhiTcA2JMqK/obzF72ueTA==
   dependencies:
     "@udyux/stylelint-order" "^4.0.2"
     stylelint-config-prettier "^8.0.1"

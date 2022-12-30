@@ -40,7 +40,7 @@ export default (grid: Ref<Grid>, generation: Ref<number>, isRunning: Ref<boolean
 
   return {
     startIterations() {
-      saveInitialState();
+      if (generation.value === 0) saveInitialState();
       nextGeneration();
     },
   };

@@ -6,6 +6,6 @@
 </template>
 
 <script setup lang="ts">
-import TopBar from '@/components/TopBar.vue';
-import GameGrid from '@/components/GameGrid.vue';
+import { TopBar } from '@/components/layout';
+import { GameGrid } from '@/components/grids';
 </script>

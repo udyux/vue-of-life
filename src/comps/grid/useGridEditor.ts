@@ -30,11 +30,7 @@ const computedEditorGrid = computed<Grid>(() => {
   return currentEditorGrid;
 });
 
-export default (grid: Ref<Grid>) => {
-  const columnCount = grid.value.length;
-  const rowCount = grid.value[0].length;
-  const gameState = useGridState(grid);
-
+export const useShape = () => {
   function mirrorShapeX() {
     if (!activeShape.value) return;
     activeShape.value = activeShape.value.map(([x, y]) => [x * -1, y]);
@@ -49,6 +45,20 @@ export default (grid: Ref<Grid>) => {
     if (!activeShape.value) return;
     activeShape.value = activeShape.value.map(([x, y]) => [y * -1, x]);
   }
+
+  return {
+    activeCell,
+    activeShape,
+    mirrorShapeX,
+    mirrorShapeY,
+    rotateShape,
+  };
+};
+
+export const useGridEditor = (grid: Ref<Grid>) => {
+  const columnCount = grid.value.length;
+  const rowCount = grid.value[0].length;
+  const gameState = useGridState(grid);
 
   function createEditorGrid() {
     editorState.createGrid(columnCount, rowCount, []);
@@ -70,11 +80,6 @@ export default (grid: Ref<Grid>) => {
 
   return {
     editorGrid: computedEditorGrid,
-    activeCell,
-    activeShape,
-    mirrorShapeX,
-    mirrorShapeY,
-    rotateShape,
     createEditorGrid,
     commitToEditor,
     commitToGrid,

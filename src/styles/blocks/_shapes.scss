@@ -1,0 +1,29 @@
+@use '../utils' as *;
+@use '../color' as *;
+
+.shapes {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__option {
+    width: calc(50% - 2rem);
+    margin: 1rem;
+    padding: 1.25rem;
+    border: 1px solid transparent;
+    border-radius: rem(4);
+    cursor: pointer;
+    transition: border-color 80ms linear;
+
+    &:hover {
+      border-color: hex(grey);
+    }
+
+    &.-selected {
+      border-color: hex(grey, lighter);
+    }
+  }
+
+  &__grid {
+    margin-top: 1rem;
+  }
+}
