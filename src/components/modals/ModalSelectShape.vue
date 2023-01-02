@@ -35,13 +35,13 @@
 import type { Coordinates } from '@/types/grid';
 import { ref } from 'vue';
 import { shapes } from '@/models';
-import { useShape } from '@/comps';
+import { useGridShape } from '@/comps';
 import { ShapeGrid } from '../grids';
 
 type Shape = { label: string; state: Coordinates[] };
 type ShapeWithKey = { key: string } & Shape;
 
-const { activeShape } = useShape();
+const { activeShape } = useGridShape();
 
 const emit = defineEmits<{
   (e: 'close'): void;

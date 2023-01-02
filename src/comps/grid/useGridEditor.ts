@@ -1,11 +1,11 @@
 import type { Ref } from 'vue';
-import type { Grid, Coordinates } from '@/types/grid';
+import type { Grid } from '@/types/grid';
 import { ref, computed } from 'vue';
 import useGridState from './useGridState';
+import useGridShape from './useGridShape';
 
 const editorGrid = ref<Grid>([]);
-const activeCell = ref<Coordinates | null>(null);
-const activeShape = ref<Coordinates[] | null>(null);
+const { activeCell, activeShape } = useGridShape();
 
 const editorState = useGridState(editorGrid);
 const { wrapCoordinates } = editorState;
@@ -30,32 +30,7 @@ const computedEditorGrid = computed<Grid>(() => {
   return currentEditorGrid;
 });
 
-export const useShape = () => {
-  function mirrorShapeX() {
-    if (!activeShape.value) return;
-    activeShape.value = activeShape.value.map(([x, y]) => [x * -1, y]);
-  }
-
-  function mirrorShapeY() {
-    if (!activeShape.value) return;
-    activeShape.value = activeShape.value.map(([x, y]) => [x, y * -1]);
-  }
-
-  function rotateShape() {
-    if (!activeShape.value) return;
-    activeShape.value = activeShape.value.map(([x, y]) => [y * -1, x]);
-  }
-
-  return {
-    activeCell,
-    activeShape,
-    mirrorShapeX,
-    mirrorShapeY,
-    rotateShape,
-  };
-};
-
-export const useGridEditor = (grid: Ref<Grid>) => {
+export default (grid: Ref<Grid>) => {
   const columnCount = grid.value.length;
   const rowCount = grid.value[0].length;
   const gameState = useGridState(grid);

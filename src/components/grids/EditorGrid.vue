@@ -25,12 +25,12 @@ import type { Ref } from 'vue';
 import type { Grid } from '@/types/grid';
 import { KeyCode } from '@/types/keyboard-events';
 import { computed, onMounted, onBeforeUnmount } from 'vue';
-import { useGridEditor, useShape } from '@/comps';
+import { useGridEditor, useGridShape } from '@/comps';
 
 const props = defineProps<{ grid: Ref<Grid>; cellSize: number }>();
 
 const { editorGrid, createEditorGrid, commitToEditor } = useGridEditor(props.grid);
-const { activeCell, mirrorShapeX, mirrorShapeY, rotateShape } = useShape();
+const { activeCell, mirrorShapeX, mirrorShapeY, rotateShape } = useGridShape();
 
 const keyboardHandlers = {
   [KeyCode.X]: mirrorShapeX,
