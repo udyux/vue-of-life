@@ -3,8 +3,6 @@
     <TopBar />
     <GameGrid />
   </main>
-
-  <div id="modals" />
 </template>
 
 <script setup lang="ts">

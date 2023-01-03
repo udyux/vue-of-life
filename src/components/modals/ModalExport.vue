@@ -1,22 +1,19 @@
 <template>
-  <Teleport to="#modals">
-    <div class="modal" @click="emit('close')">
-      <div class="modal__body" @click.stop>
-        <p>Copy and save this JSON code to import later.</p>
-        <code class="export">{{ jsonState }}</code>
+  <Modal @close="emit('close')">
+    <p>Copy and save this JSON code to import later.</p>
+    <code class="export">{{ jsonState }}</code>
 
-        <footer class="modal__footer">
-          <button class="modal__button button" @click="copyToClipboard">Copy</button>
-          <button class="modal__button button" @click="emit('close')">Done</button>
-        </footer>
-      </div>
-    </div>
-  </Teleport>
+    <footer class="modal__footer">
+      <button class="modal__button button" @click="copyToClipboard">Copy</button>
+      <button class="modal__button button" @click="emit('close')">Done</button>
+    </footer>
+  </Modal>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useGrid } from '@/comps';
+import { Modal } from '../layout';
 
 const { getGridState } = useGrid();
 

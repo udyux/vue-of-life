@@ -10,15 +10,23 @@
   width: 100%;
   height: 100%;
   background-color: rgba(black, 0.25);
+  opacity: 1;
+  z-index: 1;
+  transition: opacity 175ms linear;
   backdrop-filter: blur(5px);
 
   &__body {
+    overflow-y: auto;
     width: 35rem;
     max-width: 90%;
+    max-height: 90%;
     padding: 2.5rem;
     background-color: alpha(grey, dark);
     border-radius: 0.5rem;
-    box-shadow: 0 rem(3) rem(6) rgba(black, 0.1);
+    box-shadow: 0 rem(6) rem(8) rem(2) rgba(black, 0.1);
+    opacity: 1;
+    transform: translateZ(0);
+    transition: opacity 125ms linear, transform 175ms cb();
   }
 
   &__header {
@@ -37,5 +45,14 @@
 
   &__button {
     margin-left: 1rem;
+  }
+
+  &-enter-from {
+    opacity: 0;
+  }
+
+  &-enter-from &__body {
+    opacity: 0;
+    transform: translate3d(0, 1.25rem, 0);
   }
 }

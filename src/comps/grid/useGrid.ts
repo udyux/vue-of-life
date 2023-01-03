@@ -9,7 +9,7 @@ const isRunning = ref(false);
 const isEditing = ref(false);
 
 export default () => {
-  const { startIterations } = useGenerationIterator(grid, generation, isRunning);
+  const { timing, startIterations } = useGenerationIterator(grid, generation, isRunning);
   const { createGrid, clearGrid, setGridState, resetGridState, getGridState, setCellValue } = useGridState(
     grid,
     generation
@@ -30,6 +30,7 @@ export default () => {
 
   return {
     generation,
+    timing,
     grid,
     isRunning,
     isEditing,

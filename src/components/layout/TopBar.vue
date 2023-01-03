@@ -25,7 +25,10 @@
         </template>
       </template>
 
-      <button v-if="!isEditing" class="topbar__button button" @click="togglePlay">{{ mainActionButtonLabel }}</button>
+      <template v-if="!isEditing">
+        <output v-if="timing">{{ timing }}ms</output>
+        <button class="topbar__button button" @click="togglePlay">{{ mainActionButtonLabel }}</button>
+      </template>
     </div>
   </menu>
 
@@ -39,7 +42,8 @@ import { reactive, computed } from 'vue';
 import { useGrid, useGridEditor } from '@/comps';
 import { ModalExport, ModalImport, ModalSelectShape } from '../modals';
 
-const { grid, generation, isRunning, isEditing, resetGridState, clearGrid, togglePlay, toggleEditor } = useGrid();
+const { grid, generation, timing, isRunning, isEditing, resetGridState, clearGrid, togglePlay, toggleEditor } =
+  useGrid();
 
 const modals = reactive({
   export: false,

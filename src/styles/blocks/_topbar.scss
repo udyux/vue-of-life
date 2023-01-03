@@ -1,13 +1,19 @@
+@use '../utils' as *;
 @use '../color' as *;
 
 .topbar {
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-shrink: 0;
   width: 100%;
-  height: 2.5rem;
+  height: 3rem;
   padding: 0 2rem;
+  background-color: alpha(grey, darkest, 0.25);
+  box-shadow: 0 rem(4) rem(4) rgba(black, 0.05);
+  z-index: 1;
+  backdrop-filter: blur(3px);
 
   &__section {
     display: flex;

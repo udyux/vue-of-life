@@ -1,21 +1,17 @@
 <template>
-  <Teleport to="#modals">
-    <div class="modal" @click="emit('close')">
-      <div class="modal__body" @click.stop="eventBus.emit(GlobalSelectEvents.Close)">
-        <header class="modal__header">
-          <p>Paste an exported grid state to import or select one from the dropdown.</p>
-          <InputSelect class="modal__input" v-model="preset" :options="presets" />
-        </header>
+  <Modal :body-click-handler="onClickBody" @close="emit('close')">
+    <header class="modal__header">
+      <p>Paste an exported grid state to import or select one from the dropdown.</p>
+      <InputSelect class="modal__input" v-model="preset" :options="presets" />
+    </header>
 
-        <textarea v-model="jsonState" class="import"></textarea>
+    <textarea v-model="jsonState" class="import"></textarea>
 
-        <footer class="modal__footer">
-          <button class="modal__button button" @click="emit('close')">Cancel</button>
-          <button class="modal__button button" @click="onImport">Import</button>
-        </footer>
-      </div>
-    </div>
-  </Teleport>
+    <footer class="modal__footer">
+      <button class="modal__button button" @click="emit('close')">Cancel</button>
+      <button class="modal__button button" @click="onImport">Import</button>
+    </footer>
+  </Modal>
 </template>
 
 <script setup lang="ts">
@@ -25,6 +21,7 @@ import { useGrid } from '@/comps';
 import { initialStates } from '@/models';
 import { eventBus } from '@/utils';
 import { InputSelect } from '../inputs';
+import { Modal } from '../layout';
 
 const { setGridState } = useGrid();
 
@@ -52,5 +49,9 @@ function onImport() {
     error.value = e;
     console.error(e);
   }
+}
+
+function onClickBody() {
+  eventBus.emit(GlobalSelectEvents.Close);
 }
 </script>
