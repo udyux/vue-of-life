@@ -1,6 +1,6 @@
 # vue-of-life
 
-This template should help get you started developing with Vue 3 in Vite.
+A toroidal array implementation of Conway's Game of Life built in Vue 3.
 
 ## Recommended IDE Setup
 
@@ -17,30 +17,26 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
    2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
 2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
 ## Project Setup
 
 ```sh
-npm install
+yarn
 ```
 
 ### Compile and Hot-Reload for Development
 
 ```sh
-npm run dev
+yarn dev
 ```
 
 ### Type-Check, Compile and Minify for Production
 
 ```sh
-npm run build
+yarn build
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
 
 ```sh
-npm run lint
+yarn lint
 ```
