@@ -1,21 +1,36 @@
 # vue-of-life
 
-A toroidal array implementation of Conway's Game of Life built in Vue 3.
+A toroidal array implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) built in Vue 3.
+
+Online version is deployed on Netlify [here](https://vue-of-life.netlify.app/).
+
+## Usage
+
+Click Start to start iterating generations. Click Pause to stop and Resume.
+
+Before starting or while paused, you can click Import to set a saved initial grid state or Export to copy the current grid state.
+
+You can also click on Edit to change the current grid state before starting or resuming iterations.
+
+Click on Select Shape to choose the shape to place on the grid. You can use the following keys to change the shape:
+
+- `X` to flip horizontally
+- `Y` to flip vertically
+- `R` to rotate 90 degrees
+
+Click on Save to commit the edits to the grid or Cancel to discard them. Note that, at this time, it is only possible to add live cells. You cannot "kill" cells that are already alive in the grid.
 
 ## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar).
 
-## Type Support for `.vue` Imports in TS
+If you regularly work in Vue 2 workspaces, disable the Volar extension globally. Then, in this workspace, right-click on the Vetur extension in the sidebar and select "Disable (Workspace)". Then right-click on the Volar extension and select "Enable (Workspace)".
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+You will also need to enable [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) by doing the following:
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+- Run `Extensions: Show Built-in Extensions` from VSCode's command palette
+- Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
+- Reload the VSCode window by running `Developer: Reload Window` from the command palette.
 
 ## Project Setup
 
