@@ -1,6 +1,6 @@
 {
-  "name": "game-of-life",
-  "version": "0.1.0",
+  "name": "vue-of-life",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "node svgsprite && vite",
