@@ -26,7 +26,7 @@ Click on Save to commit the edits to the grid or Cancel to discard them. Note th
 
 If you regularly work in Vue 2 workspaces, disable the Volar extension globally. Then, in this workspace, right-click on the Vetur extension in the sidebar and select `Disable (Workspace)`. Then right-click on the Volar extension and select `Enable (Workspace)`.
 
-You will also need to enable [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) by doing the following:
+You will also need to enable TypeScript [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) by doing the following:
 
 - Run `Extensions: Show Built-in Extensions` from VSCode's command palette
 - Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
