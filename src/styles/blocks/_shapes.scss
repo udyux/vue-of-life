@@ -2,12 +2,24 @@
 @use '../color' as *;
 
 .shapes {
-  display: flex;
-  flex-wrap: wrap;
+  &__header {
+    @include type-header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1.25rem;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid hex(grey);
+
+    i {
+      transform: translate3d(0, -2px, 0);
+      font-size: 1.25em;
+    }
+  }
 
   &__option {
-    width: calc(50% - 2rem);
-    margin: 1rem;
+    margin: 1rem 0;
     padding: 1.25rem;
     border: 1px solid transparent;
     border-radius: rem(4);

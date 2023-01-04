@@ -19,7 +19,7 @@ import { ref, computed, onMounted } from 'vue';
 const props = defineProps<{ shape: Coordinates[] }>();
 
 const cellSize = 5;
-const minGridHeight = 11;
+const minGridHeight = 15;
 
 const gridNode = ref<HTMLDivElement | null>(null);
 const gridSize = ref<number[]>([]);
@@ -51,7 +51,7 @@ onMounted(() => {
     )
     .reduce((n, bound) => Math.abs(bound) + n, 0);
 
-  const height = !(rangeY % 2) ? rangeY + 7 : rangeY + 6;
+  const height = !(rangeY % 2) ? rangeY + 9 : rangeY + 8;
   gridSize.value = [width, Math.max(height, minGridHeight)];
 });
 </script>

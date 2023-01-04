@@ -1,4 +1,3 @@
-/* eslint-disable */
 type EventCallback = (...args: unknown[]) => void;
 
 declare module 'tiny-emitter/instance' {

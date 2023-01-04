@@ -18,7 +18,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { useGrid } from '@/comps';
-import { shapes } from '@/models';
+import { methuselahs } from '@/models/shapes';
 import EditorGrid from './EditorGrid.vue';
 
 const { grid, isRunning, isEditing, createGrid, setCellValue } = useGrid();
@@ -33,7 +33,7 @@ onMounted(() => {
   const { clientWidth, clientHeight } = gameNode.value;
   const columnCount = Math.floor(clientWidth / cellSize);
   const rowCount = Math.floor(clientHeight / cellSize);
-  createGrid(columnCount, rowCount, shapes.rPentomino.state);
+  createGrid(columnCount, rowCount, methuselahs.shapes.rPentomino.state);
 });
 
 function onClickCell(x: number, y: number, isAlive: boolean) {
