@@ -1,34 +1,38 @@
 <template>
   <Modal @close="emit('close')">
-    <p>Select a shape to place.</p>
+    <header class="modal__header">
+      <p>Select a shape to place.</p>
+    </header>
 
-    <section class="shapes">
-      <article class="shapes__option" :class="{ '-selected': selectedShape === null }" @click="selectedShape = null">
-        <p>Single cell (draw)</p>
-        <ShapeGrid class="shapes__grid" :shape="[[0, 0]]" />
-      </article>
-    </section>
-
-    <template v-for="({ label, shapes }, sectionKey) in shapeLists" :key="sectionKey">
-      <button class="shapes__header" @click="toggleSection(sectionKey)">
-        <span>{{ label }}</span>
-        <i v-if="shapeSections[sectionKey]">&times;</i>
-        <i v-else>+</i>
-      </button>
-
-      <Collapsible :is-open="shapeSections[sectionKey]" content-class="shapes" content-tag="section">
-        <article
-          v-for="(shape, key) in shapes"
-          :key="key"
-          class="shapes__option"
-          :class="{ '-selected': isSelectedShape(key) }"
-          @click="setSelectedShape(key, shape)"
-        >
-          <p>{{ shape.label }}</p>
-          <ShapeGrid class="shapes__grid" :shape="shape.state" />
+    <div class="modal__content">
+      <section class="shapes">
+        <article class="shapes__option" :class="{ '-selected': selectedShape === null }" @click="selectedShape = null">
+          <p>Single cell (draw)</p>
+          <ShapeGrid class="shapes__grid" :shape="[[0, 0]]" />
         </article>
-      </Collapsible>
-    </template>
+      </section>
+
+      <template v-for="({ label, shapes }, sectionKey) in shapeLists" :key="sectionKey">
+        <button class="shapes__header" @click="toggleSection(sectionKey)">
+          <span>{{ label }}</span>
+          <i v-if="shapeSections[sectionKey]">&times;</i>
+          <i v-else>+</i>
+        </button>
+
+        <Collapsible :is-open="shapeSections[sectionKey]" content-class="shapes" content-tag="section">
+          <article
+            v-for="(shape, key) in shapes"
+            :key="key"
+            class="shapes__option"
+            :class="{ '-selected': isSelectedShape(key) }"
+            @click="setSelectedShape(key, shape)"
+          >
+            <p>{{ shape.label }}</p>
+            <ShapeGrid class="shapes__grid" :shape="shape.state" />
+          </article>
+        </Collapsible>
+      </template>
+    </div>
 
     <footer class="modal__footer">
       <button class="modal__button button" @click="emit('close')">Cancel</button>

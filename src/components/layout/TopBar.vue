@@ -13,6 +13,7 @@
       <template v-if="!isRunning">
         <template v-if="isEditing">
           <button class="topbar__button button" @click="toggleEditor">Cancel</button>
+          <button class="topbar__button button" @click="clearGrid">Clear</button>
           <button class="topbar__button button" @click="onSave">Save</button>
         </template>
 

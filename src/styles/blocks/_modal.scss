@@ -16,10 +16,10 @@
   backdrop-filter: blur(5px);
 
   &__body {
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
     width: 35rem;
     max-width: 90%;
-    max-height: 90%;
     padding: 2.5rem;
     background-color: alpha(grey, dark);
     border-radius: 0.5rem;
@@ -29,13 +29,21 @@
     transition: opacity 125ms linear, transform 175ms cb();
   }
 
+  &__content {
+    overflow-y: auto;
+    max-height: 31.8rem;
+  }
+
   &__header {
     display: flex;
+    flex-shrink: 0;
+    padding-bottom: 1.5rem;
   }
 
   &__footer {
     display: flex;
     justify-content: flex-end;
+    flex-shrink: 0;
     margin-top: 2rem;
   }
 

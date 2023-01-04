@@ -33,7 +33,7 @@ onMounted(() => {
   const { clientWidth, clientHeight } = gameNode.value;
   const columnCount = Math.floor(clientWidth / cellSize);
   const rowCount = Math.floor(clientHeight / cellSize);
-  createGrid(columnCount, rowCount, methuselahs.shapes.rPentomino.state);
+  createGrid(columnCount, rowCount, methuselahs.shapes.acorn.state);
 });
 
 function onClickCell(x: number, y: number, isAlive: boolean) {
