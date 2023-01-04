@@ -6,7 +6,7 @@ Online version is deployed on Netlify [here](https://vue-of-life.netlify.app/).
 
 ## Usage
 
-Click Start to start iterating generations. Click Pause to stop and Resume.
+Click Start to start iterating generations. Click Pause to stop and Resume to continue.
 
 Before starting or while paused, you can click Import to set a saved initial grid state or Export to copy the current grid state.
 
