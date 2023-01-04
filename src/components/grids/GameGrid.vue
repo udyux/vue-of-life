@@ -7,7 +7,6 @@
         class="grid__cell"
         :class="{ '-alive': isAlive }"
         :style="{ '--cell-size': `${cellSize}px` }"
-        @click="onClickCell(x, y, isAlive)"
       />
     </ul>
 
@@ -21,7 +20,7 @@ import { useGrid } from '@/comps';
 import { methuselahs } from '@/models/shapes';
 import EditorGrid from './EditorGrid.vue';
 
-const { grid, isRunning, isEditing, createGrid, setCellValue } = useGrid();
+const { grid, isEditing, createGrid } = useGrid();
 
 const gameNode = ref<HTMLElement | null>(null);
 
@@ -35,8 +34,4 @@ onMounted(() => {
   const rowCount = Math.floor(clientHeight / cellSize);
   createGrid(columnCount, rowCount, methuselahs.shapes.acorn.state);
 });
-
-function onClickCell(x: number, y: number, isAlive: boolean) {
-  if (!isRunning.value && isRunning.value) setCellValue([x, y], !isAlive);
-}
 </script>
