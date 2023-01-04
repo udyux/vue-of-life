@@ -12,7 +12,7 @@ Before starting or while paused, you can click Import to set a saved initial gri
 
 You can also click on Edit to change the current grid state before starting or resuming iterations.
 
-Click on Select Shape to choose the shape to place on the grid. You can use the following keys to change the shape:
+Click on Select Shape to choose the shape to place on the grid. You can use the following keys to modify the shape:
 
 - `X` to flip horizontally
 - `Y` to flip vertically
