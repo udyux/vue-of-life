@@ -24,7 +24,7 @@ Click on Save to commit the edits to the grid or Cancel to discard them. Note th
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar).
 
-If you regularly work in Vue 2 workspaces, disable the Volar extension globally. Then, in this workspace, right-click on the Vetur extension in the sidebar and select "Disable (Workspace)". Then right-click on the Volar extension and select "Enable (Workspace)".
+If you regularly work in Vue 2 workspaces, disable the Volar extension globally. Then, in this workspace, right-click on the Vetur extension in the sidebar and select `Disable (Workspace)`. Then right-click on the Volar extension and select `Enable (Workspace)`.
 
 You will also need to enable [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) by doing the following:
 
